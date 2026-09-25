@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlayVidey</title>
+
+    <!-- Meta Tags Open Graph (Facebook, WhatsApp, Telegram, DLL) -->
+    <meta property="og:title" content="Tonton Video Terbaru">
+    <meta property="og:description" content="Klik untuk menonton tayangan video secara langsung.">
+    <meta property="og:image" content="https://i.ibb.co.com/TDcswNQ5/1790323528598.png">
+    <meta property="og:url" content="https://domain-anda.com/halaman-video.html">
+    <meta property="og:type" content="video.other">
+
+    <!-- Meta Tags Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tonton Video Terbaru">
+    <meta name="twitter:description" content="Klik untuk menonton tayangan video secara langsung.">
+    <meta name="twitter:image" content="https://i.ibb.co.com/TDcswNQ5/1790323528598.png">
+
+    <!-- Skrip Iklan Popunder Adsterra -->
+    <script src="https://thewilddetail.com/d8/8e/b3/d88eb3d0170ef3478f8f44203ace8da9.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* Tampilan Pemutar Video Layar Penuh */
+        .video-wrapper {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .video-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Lapisan Transparan & Tombol Play Semu Awal */
+        .play-overlay {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            cursor: pointer;
+        }
+
+        .play-button {
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.65);
+            border: 3px solid rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .play-overlay:hover .play-button {
+            transform: scale(1.1);
+            background: rgba(255, 71, 87, 0.85);
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-top: 16px solid transparent;
+            border-bottom: 16px solid transparent;
+            border-left: 26px solid #ffffff;
+            margin-left: 5px;
+        }
+
+        /* Modal Iklan Verifikasi Umur */
+        .age-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: 20px;
+        }
+
+        .age-modal-box {
+            background: #1c1c1c;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 25px 20px;
+            max-width: 350px;
+            width: 100%;
+            text-align: center;
+            color: #ffffff;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .age-modal-box h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #ff4757;
+        }
+
+        .age-modal-box p {
+            font-size: 14px;
+            color: #cccccc;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .age-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 0;
+            background: #ff4757;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="video-wrapper">
+        <div class="video-container">
+            <iframe
+                src="https://videy.co/v/?id=HnJX4Ask1"
+                title="Videy Video Player"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+                scrolling="no">
+            </iframe>
+        </div>
+    </div>
+
+    <!-- 1. Lapisan Transparan & Tombol Play Segitiga Awal -->
+    <div class="play-overlay" id="playOverlay">
+        <div class="play-button">
+            <div class="play-icon"></div>
+        </div>
+    </div>
+
+    <!-- 2. Modal Iklan Verifikasi Umur (Muncul setelah video berjalan 5 detik) -->
+    <div class="age-modal-overlay" id="ageModal">
+        <div class="age-modal-box">
+            <h2>Konfirmasi Umur</h2>
+            <p>Konten ini memerlukan verifikasi usia. Lanjutkan jika Anda sudah berusia 18 tahun ke atas.</p>
+            <button class="age-btn" id="confirmAgeBtn">Saya Berusia 18+</button>
+        </div>
+    </div>
+
+    <script>
+        const SMARTLINK_URL = "https://thewilddetail.com/z02a1bxd?key=f48d1b3a91d0b1fd3db51c3c384a044b";
+        const SOCIAL_BAR_SRC = "https://thewilddetail.com/0b/28/3b/0b283b590e4a16de38f299a6ffe16906.js";
+
+        let clickCount = 0;
+        const playOverlay = document.getElementById('playOverlay');
+        const ageModal = document.getElementById('ageModal');
+        const confirmAgeBtn = document.getElementById('confirmAgeBtn');
+
+        // Tahap 1: Pemicu 2 Kali Klik Iklan Awal
+        playOverlay.addEventListener('click', function() {
+            clickCount++;
+
+            if (clickCount === 1) {
+                // Klik 1: Popunder / Smartlink pertama
+                window.open(SMARTLINK_URL, '_blank');
+            } 
+            else if (clickCount >= 2) {
+                // Klik 2: Smartlink kedua
+                window.open(SMARTLINK_URL, '_blank');
+
+                // Hapus lapisan play semu agar video mulai dimainkan
+                this.remove();
+
+                // Mulai timer 5 detik untuk munculkan iklan verifikasi umur
+                startAgeTimer();
+            }
+        });
+
+        // Tahap 2: Timer 5 Detik setelah video mulai jalan
+        function startAgeTimer() {
+            setTimeout(() => {
+                ageModal.style.display = 'flex';
+            }, 5000); // 5000 milidetik = 5 detik
+        }
+
+        // Tahap 3: Klik Verifikasi Umur -> Buka Smartlink & Tampilkan Social Bar di Bawah Screen
+        confirmAgeBtn.addEventListener('click', function() {
+            // Buka Smartlink verifikasi
+            window.open(SMARTLINK_URL, '_blank');
+
+            // Tutup modal verifikasi umur
+            ageModal.style.display = 'none';
+
+            // Muat skrip Social Bar (otomatis melayang di bagian paling bawah HP)
+            loadSocialBar();
+        });
+
+        function loadSocialBar() {
+            if (!document.getElementById('socialBarScript')) {
+                const script = document.createElement('script');
+                script.id = 'socialBarScript';
+                script.src = SOCIAL_BAR_SRC;
+                document.body.appendChild(script);
+            }
+        }
+    </script>
+
+</body>
+</html>
