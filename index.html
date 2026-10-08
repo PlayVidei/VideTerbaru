@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Eksklusif Media Streaming</title>
     
-    <!-- Meta Open Graph (Gambar Baru) -->
+    <!-- Meta Open Graph -->
     <meta property="og:title" content="Portal Berita & Hiburan Terkini">
     <meta property="og:description" content="Tonton tayangan video lengkap kualitas HD di sini.">
-    <meta property="og:image" content="https://i.ibb.co.com/FkPgG8S7/1790926801512.jpg">
+    <meta property="og:image" content="https://i.ibb.co.com/YF4NY5WX/Screenshot-2026-1009-000706.png">
     <meta property="og:type" content="website">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -20,10 +20,10 @@
             font-family: 'Poppins', sans-serif; overflow: hidden; color: #fff;
         }
 
-        /* 1. TIRAI GATE (Popunder 1) - Background disamakan dengan poster video */
+        /* 1. TIRAI GATE (Popunder 1) */
         #prePlayerGate {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.9)), url('https://i.ibb.co.com/Q35Z0Qyz/Screenshot-2026-1003-104622.png') center/cover no-repeat;
+            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.9)), url('https://i.ibb.co.com/YF4NY5WX/Screenshot-2026-1009-000706.png') center/cover no-repeat;
             z-index: 2000; display: flex; justify-content: center; align-items: center;
         }
         .gate-btn {
@@ -91,8 +91,7 @@
 
     <!-- STAGE 2: Pemutar Video -->
     <div class="video-container">
-        <!-- POSTER DAN VIDEO SUDAH DIPERBARUI -->
-        <video id="secureVideo" poster="https://i.ibb.co.com/Q35Z0Qyz/Screenshot-2026-1003-104622.png" playsinline webkit-playsinline>
+        <video id="secureVideo" poster="https://i.ibb.co.com/YF4NY5WX/Screenshot-2026-1009-000706.png" playsinline webkit-playsinline>
             Browser Anda tidak mendukung pemutar video.
         </video>
         
@@ -164,9 +163,9 @@
         let hasPassedAge = false;
         let hasPassedHuman = false;
 
-        // Muat Video Source (URL VIDEO BARU)
+        // Muat Video Source
         window.addEventListener('DOMContentLoaded', () => {
-            videoElement.src = "https://cdn.videy.co/zWDZrdFN1.mp4";
+            videoElement.src = "https://cdn.videy.co/vrG6CPTn1.mp4";
             videoElement.load();
         });
 
