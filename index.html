@@ -159,21 +159,21 @@
         <p>&copy; 2026 StreamPlay VIP. All rights reserved.</p>
     </footer>
 
-    <!-- MODAL POPUP SHOPEE (Ukuran Besar Hampir Full Layar) -->
+    <!-- MODAL POPUP SHOPEE (Ukuran & Gambar Menyesuaikan Kontainer) -->
     <div id="shopeeModal" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-md hidden items-center justify-center p-2 sm:p-4">
-        <div class="relative w-[95%] max-w-lg h-auto max-h-[90vh] bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden shadow-2xl popup-overlay flex flex-col items-center">
+        <div class="relative w-[95%] max-w-lg h-[85vh] bg-slate-900 border border-slate-700 rounded-2xl overflow-hidden shadow-2xl popup-overlay flex flex-col">
             
-            <!-- Tombol Close (Lebih Terlihat & Tidak Terlalu Menyudut) -->
-            <button id="closeBtn" onclick="closeShopeeModal()" class="hidden absolute top-3.5 right-3.5 bg-slate-800/90 hover:bg-rose-600 text-white w-9 h-9 rounded-full flex items-center justify-center transition duration-300 z-20 shadow-lg border border-white/40 text-base font-bold">
+            <!-- Tombol Close (Lingkaran Putih & Ikon Merah) -->
+            <button id="closeBtn" onclick="closeShopeeModal()" class="hidden absolute top-3.5 right-3.5 bg-white hover:bg-slate-100 text-red-600 w-9 h-9 rounded-full flex items-center justify-center transition duration-300 z-20 shadow-xl border border-gray-200 text-base font-bold">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <!-- Link & Gambar Shopee -->
-            <a id="shopeeLink" href="#" target="_blank" class="block w-full text-center group flex flex-col h-full">
-                <div class="w-full flex-grow overflow-hidden bg-black flex items-center justify-center p-1">
-                    <img id="shopeeImage" src="" alt="Promo Shopee" class="w-full h-auto max-h-[78vh] object-contain group-hover:scale-105 transition duration-300">
+            <!-- Link & Gambar Shopee (Menyesuaikan Ukuran Kontainer) -->
+            <a id="shopeeLink" href="#" target="_blank" class="flex flex-col w-full h-full group">
+                <div class="relative w-full flex-grow overflow-hidden bg-black flex items-center justify-center">
+                    <img id="shopeeImage" src="" alt="Promo Shopee" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                 </div>
-                <div class="p-3.5 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold text-base sm:text-lg flex items-center justify-center gap-2 shadow-inner">
+                <div class="py-3.5 px-4 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold text-base sm:text-lg flex items-center justify-center gap-2 shadow-inner shrink-0">
                     <i class="fa-solid fa-bag-shopping"></i>
                     <span>Buka Promo Shopee Sekarang</span>
                 </div>
@@ -273,7 +273,7 @@
         }
 
         // Tutup modal jika area luar pop-up diklik
-        modal.addEventListener('click', function(e) {
+        modal.addEventListener('click', function5 => {
             if (e.target === modal) {
                 closeShopeeModal();
             }
